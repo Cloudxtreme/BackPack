@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/skel.min.js"></script>
+    <script src="../../static/js/skel-layers.min.js"></script>
+    <script src="../../static/js/init.js"></script>
+    <!-- <noscript> -->
+      <link rel="stylesheet" href="../../static/css/skel.css" />
+      <link rel="stylesheet" href="../../static/css/style.css" />
+      <link rel="stylesheet" href="../../static/css/style-xlarge.css" />
+    <!-- </noscript> -->
+  </head>
+  <body id="top">
+  <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+      <h1><a href="{{ url_for('index') }}">GottaBack</a></h1>
+      <nav id="nav">
+        <ul>
+          <li><a href="{{ url_for('index') }}">Home </a>
+          <li><a href="left-sidebar.html">Left Sidebar</a></li>
+          <li><a href="right-sidebar.html">Right Sidebar</a></li>
+          <li><a href="no-sidebar.html">No Sidebar</a></li>
+          <li><a href="" class="button special">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <section id="one" class="wrapper style1">
+      <header class="major">
+        <h2>Sign In</h2>
+        <form name="login" method="post" action='/login'>
+          Username:<input type='text' name=username required placeholder="Username"><br>
+          Password:<input type='password' name=password required placeholder="Password"><br>
+          <input type="submit" value="Login">
+        </form>
+      </header>
+    </section>
+  </body>

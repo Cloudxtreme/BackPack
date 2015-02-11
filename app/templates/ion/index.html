@@ -19,14 +19,22 @@
 
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
-				<h1><a href="#">GottaBack</a></h1>
+				<h1><a href="">GottaBack</a></h1>
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Home, {{ user.nickname }}</a></li>
+						{% if user.nickname %}
+						<li><a href="index.html">Welcome, {{ user.nickname }}</a></li>
+						{% else %}
+						<li><a href="index.hmtl">Home </a></li>
+						{% endif %}
 						<li><a href="left-sidebar.html">Left Sidebar</a></li>
 						<li><a href="right-sidebar.html">Right Sidebar</a></li>
 						<li><a href="no-sidebar.html">No Sidebar</a></li>
-						<li><a href="#" class="button special">Sign Up</a></li>
+						{% if user.nickname %}
+						<li><a href="" class="button special">Logout</a></li>
+						{% else %}
+						<li><a href="{{ url_for('login') }}" class="button special">Login</a></li>
+						{% endif %}
 					</ul>
 				</nav>
 			</header>
@@ -37,7 +45,7 @@
 					<h2>Gotta Back</h2>
 					<p>A Google Drive backup by <a href="https://github.com/SilverBulletApps">SilverBulletApps</a></p>
 					<ul class="actions">
-						<li><a href="#content" class="button big special">Sign Up</a></li>
+						<li><a href="{{ url_for('login') }}" class="button big special">Sign Up</a></li>
 						<li><a href="#elements" class="button big alt">Learn More</a></li>
 					</ul>
 				</div>
@@ -45,7 +53,7 @@
 
 		<!-- One -->
 			<section id="one" class="wrapper style1">
-				<header class="major">
+				<header class  ="major">
 					<h2>One</h2>
 					<p>Words.</p>
 				</header>
