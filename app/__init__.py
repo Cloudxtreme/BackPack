@@ -7,9 +7,6 @@ db = SQLAlchemy()
 
 login_manager = LoginManager()
 login_manager.login_view = 'home'
-@login_manager.unauthorized_handler
-def unauthorized():
-    return Response('Please sign in to use BackPack', 401)
 
 
 def create_app(config_name):
