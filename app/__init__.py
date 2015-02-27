@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response
 from config import config
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
@@ -6,7 +6,11 @@ from flask.ext.login import LoginManager
 db = SQLAlchemy()
 
 login_manager = LoginManager()
-login_manager.login_view = 'login'
+login_manager.login_view = 'home'
+@login_manager.unauthorized_handler
+def unauthorized():
+    return Response('Please sign in to use BackPack', 401)
+
 
 def create_app(config_name):
   app = Flask(__name__)

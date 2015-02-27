@@ -2,12 +2,10 @@ from flask import render_template, flash, redirect
 from app import app
 from flask import request
 
-users = {'test:test'}
-
 @app.route('/')
 @app.route('/home')
 def index():
-  user= {'nickname': ''}
+  user= {'name': ''}
   return render_template('ion/index.html',
                         title='GottaBack - Home',
                         user=user)
@@ -16,9 +14,14 @@ def index():
 def login():
   error = None
   if request.method == 'POST':
-    if valid_login(request.form['username'],
-                  request.form['password']):
-      return log_the_user_in(request.form['username'])
+    if (request.form['username']):
+      user={'name':request.form['username']}
+      return render_template('ion/index.html',
+                        title='GottaBack - Home',
+                        user=user)
+
+    #              request.form['password']):
+    #  return log_the_user_in(request.form['username'])
     else:
       error = 'Invalid username/password'
   return render_template('ion/login.html',

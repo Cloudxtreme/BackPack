@@ -2,7 +2,7 @@ import httplib2, json, argparse
 from flask import render_template, flash, redirect, request, url_for, session
 from . import backpack
 from drive import drive_listchanges
-from flask.ext.login import login_user, current_user
+from flask.ext.login import login_user, current_user, login_required, logout_user
 from ..models import User
 from apiclient import errors
 from apiclient.discovery import build
@@ -35,7 +35,14 @@ def login():
   return render_template('ion/login.html',
                         title='GottaBack - Home')
 
+@backpack.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect('home')
+
 @backpack.route('/user/<username>/backups')
+@login_required
 def backup(username):
   user = User.query.filter_by(username=username).first_or_404()
   if 'credentials' not in session:
@@ -48,7 +55,6 @@ def backup(username):
   drive = build('drive', 'v2', http_auth)
   backups = drive_backupfolder(username, drive)
   files = drive_files(backups['items'][0]['id'], drive)
-  print backups
   return render_template('ion/backup.html',
                           title='GottaBack - Backups',
                           username=username,
@@ -56,6 +62,7 @@ def backup(username):
     
 
 @backpack.route('/user/<username>')
+@login_required
 def user(username):
   user = User.query.filter_by(username=username).first_or_404()
   if 'credentials' not in session:
@@ -94,7 +101,6 @@ def oauth2callback():
       credentials = flow.step2_exchange(auth_code)
       session['credentials'] = credentials.to_json()
       return redirect(url_for('.user', username=current_user.username))
-
 
 def drive_listchanges(service):
   changes = service.changes().list().execute()
