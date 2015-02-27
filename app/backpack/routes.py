@@ -7,7 +7,9 @@ from ..models import User
 from apiclient import errors
 from apiclient.discovery import build
 from datetime import datetime, timedelta
-from oauth2client import file, client, tools
+import dateutil.parser
+import logging
+from oauth2client import client, tools
 
 @backpack.route('/')
 @backpack.route('/home')
@@ -33,6 +35,26 @@ def login():
   return render_template('ion/login.html',
                         title='GottaBack - Home')
 
+@backpack.route('/user/<username>/backups')
+def backup(username):
+  user = User.query.filter_by(username=username).first_or_404()
+  if 'credentials' not in session:
+    return redirect(url_for('.oauth2callback'))
+  credentials = client.OAuth2Credentials.from_json(session['credentials'])
+  if credentials.access_token_expired:
+    return redirect(url_for('.oauth2callback'))
+  credentials = client.OAuth2Credentials.from_json(session['credentials'])
+  http_auth = credentials.authorize(httplib2.Http())
+  drive = build('drive', 'v2', http_auth)
+  backups = drive_backupfolder(username, drive)
+  files = drive_files(backups['items'][0]['id'], drive)
+  print backups
+  return render_template('ion/backup.html',
+                          title='GottaBack - Backups',
+                          username=username,
+                          backups=files['items'])
+    
+
 @backpack.route('/user/<username>')
 def user(username):
   user = User.query.filter_by(username=username).first_or_404()
@@ -45,11 +67,11 @@ def user(username):
     http_auth = credentials.authorize(httplib2.Http())
     drive = build('drive', 'v2', http_auth)
     changes = drive_listchanges(drive)
-    print "\n Changes: \n", changes
+
     return render_template('ion/user.html',
-                        title='GottaBack - ' + username,
-                        username=username,
-                        changes=changes)
+                          title='GottaBack - ' + username,
+                          username=username,
+                          changes=changes)
 
 @backpack.route('/oauth2callback')
 def oauth2callback():
@@ -76,16 +98,23 @@ def oauth2callback():
 
 def drive_listchanges(service):
   changes = service.changes().list().execute()
-  print changes['items']
   result = []
-  for change in changes['items']:
+  for change in reversed(changes['items']):
     current = {}
     if change.has_key('file'):
       current['type'] = change['file']['mimeType']
       current['title'] = change['file']['title']
-      current['deleted'] = change['deleted']
-      current['modificationDate'] = change['modificationDate']
+      current['deleted'] = change['file']['labels']['trashed']
+      current['creationDate'] = dateutil.parser.parse(change['file']['createdDate'])
+      current['modificationDate'] = dateutil.parser.parse(change['file']['modifiedDate'])
       current['user'] = change['file']['lastModifyingUserName']
       result.append(current)
-
   return result
+
+def drive_backupfolder(name, service):
+  query = "'root' in parents and mimeType = 'application/vnd.google-apps.folder' and title contains '" + name.lower()+"'"
+  return service.files().list(q=query).execute()
+
+def drive_files(parent, service):
+  query = "'"+parent+"' in parents"
+  return service.files().list(q=query).execute()
