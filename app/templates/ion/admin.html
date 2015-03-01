@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/skel.min.js"></script>
+    <script src="../../static/js/skel-layers.min.js"></script>
+    <script src="../../static/js/init.js"></script>
+    <!-- <noscript> -->
+      <link rel="stylesheet" href="../../static/css/skel.css" />
+      <link rel="stylesheet" href="../../static/css/style.css" />
+      <link rel="stylesheet" href="../../static/css/style-xlarge.css" />
+      <link rel="stylesheet" href="../../static/css/sidebar.css" />
+    <!-- </noscript> -->
+  </head>
+<body id="top">
+  <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+      <h1><a href="{{ url_for('.logout') }}">BackPack</a></h1>
+      <nav id="nav">
+        <ul>
+          <li>{% filter upper %} {{ username }} {% endfilter %}</li>
+          <li></li>
+          <li></li>
+          <li><a href="{{ url_for('.logout') }}" class="button special">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+  <!-- Sidebar -->
+  <div id='cssmenu'>
+    <ul>
+      <li class='active'><a href=''><span>Activity Log</span></a></li>
+      <li><a href=''><span>Backups</span></a>
+      <li><a href=""><span>Statistics</span></a></li>
+      <li><a href=''><span>Config</span></a></li>
+      <li class='last'><a href='#'><span>Contact</span></a></li>
+    </ul>
+  </div>
+  
+  <section id="one" class="wrapper style1">
+    <header class="major">
+      <h2>Activity Log</h2>
+      <ul>
+      {% for change in changes %}
+        {% if change['deleted'] == True %}
+          <li style="list-style-type:none;background-color:#FF6969;color:white;padding:0;"> {{ change['user'] }} trashed {{ change['title'] }} at {{ change['modificationDate'] }} </li>
+        {% elif change['creationDate'] == change['modificationDate'] %}
+          <li style="list-style-type:none;background-color:#79B2FC;color:white;padding:0;"> {{ change['user'] }} created {{ change['title'] }} at {{ change['creationDate'] }} </li>
+        {% else %}
+          <li style="list-style-type:none;padding:0;"> {{ change['user'] }} modified {{ change['title'] }} at {{ change['modificationDate'] }} </li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </header>
+  </section>
+</body>
+</html>
