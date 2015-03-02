@@ -1,0 +1,11 @@
+#!/bin/bash
+
+USERNAME=$1
+ADDRESS=$2
+
+USAGE=`df -h | grep $USERNAME | awk '{ print $5 }'`
+USAGE=${USAGE:0:1}
+if [ $USAGE > 90 ] 
+then
+	echo "$USERNAME is at $USAGE%. Go yell at them." | mail -s "Capacity Warning[$USERNAME]" $ADDRESS
+fi
