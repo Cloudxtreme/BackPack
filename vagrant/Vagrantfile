@@ -1,0 +1,39 @@
+Vagrant.configure(2) do |config|
+
+	config.vm.provision :shell, path: "bootstrap.sh"
+
+	config.vm.provider :virtualbox do |v|
+		v.gui = true
+	end
+
+	config.vm.define("client1") do |client1_config|
+		client1_config.vm.box = "chef/centos-6.6"
+		client1_config.vm.hostname = "client1"
+		client1_config.vm.network "private_network", ip: "172.25.0.3", netmask: "255.255.0.0"
+		client1_config.vm.network "forwarded_port", guest: "80", host: "8083", host_ip: "127.0.0.1"
+		client1_config.vm.synced_folder "shared", "/var/www"
+	end
+
+	config.vm.define("serv") do |serv_config|
+		serv_config.vm.box = "chef/centos-6.6"
+		serv_config.vm.hostname = "serv"
+		serv_config.vm.network "private_network", ip: "172.25.0.2", netmask: "255.255.0.0"
+		serv_config.vm.network "forwarded_port", guest: "80", host: "8082", host_ip: "127.0.0.1"
+		serv_config.vm.synced_folder "shared", "/var/www"
+	end
+
+	#config.vm.define("m4") do |m4_config|
+	#	m4_config.vm.box = "chef/centos-6.6"
+	#	m4_config.vm.hostname = "m4"
+	#	m4_config.vm.network "private_network", ip: "172.25.0.4", netmask: "255.255.0.0"
+	#	m4_config.vm.network "forwarded_port", guest: "80", host: "8084", host_ip: "127.0.0.1"
+	#end
+
+	#config.vm.define("m5") do |m5_config|
+	#	m5_config.vm.box = "chef/centos-6.6"
+	#	m5_config.vm.hostname = "m5"
+	#	m5_config.vm.network "private_network", ip: "172.25.0.5", netmask: "255.255.0.0"
+	#	m5_config.vm.network "forwarded_port", guest: "80", host: "8085", host_ip: "127.0.0.1"
+	#end
+
+end
