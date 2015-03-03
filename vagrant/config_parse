@@ -11,5 +11,5 @@ do
   includes=`echo $line | cut -d ' ' -f3 | tr ":" " "`
   excludes=`echo $line | cut -d ' ' -f4 | tr ":" " "`
   #The correct duplicity command
-  echo 'duplicity --asynchronous-upload --no-encryption --no-print-statistics '$includes' gdocs://silverbulletapps@gmail.com:cs180rocks/'$username'/'$CURRENT_TIME
+  echo 'duplicity --asynchronous-upload --no-encryption --no-print-statistics '$includes' gdocs://silverbulletapps@gmail.com/'$username'/'$CURRENT_TIME
 done < "$CONFIG_FILE" 
