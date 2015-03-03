@@ -3,7 +3,7 @@
 HOST="`hostname`"
 SERVHOST="serv"
 SERVIP="172.25.0.2"
-CLIENTS=("172.25.0.3")
+CLIENTS=("172.25.0.3" "172.25.0.4" "172.25.0.5")
 REPO="epel-release-6-8.noarch.rpm"
 PREDEST="root@"
 
@@ -42,8 +42,8 @@ then
 	
 	for i in "${CLIENTS[@]}"
 	do
-		D=${PREDEST}${i} 
-		sshpass -p 'vagrant' ssh-copy-id -i /root/.ssh/id_rsa $D
+		ssh-keyscan $i >> /root/.ssh/known_hosts
+		sshpass -p 'vagrant' ssh-copy-id -i /root/.ssh/id_rsa ${PREDEST}${i} 
 	done
 	mv /root/.bashrc.bak /root/.bashrc
 	echo "-----finished ssh permitions-----"
