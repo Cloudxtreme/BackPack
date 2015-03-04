@@ -42,20 +42,20 @@ then
 	sudo rpm -ivh "/usr/local/src/${REPO}"
 	echo "-----installing  duplicity and necessary tools-----"
 	sudo yum install -y duplicity rsync gpg python python-devel python-pip sshpass
-fi
 
-echo "-----installing Googoe Data-----"
-cd /var/www
-if [ ! -e "/var/www/gdata-2.0.17/" ]
-then 
-	if [ ! -e "/var/www/gdata-2.0.17.zip" ]
-	then
-		wget http://gdata-python-client.googlecode.com/files/gdata-2.0.17.zip
+	echo "-----installing Googoe Data-----"
+	cd /var/www
+	if [ ! -e "/var/www/gdata-2.0.17/" ]
+	then 
+		if [ ! -e "/var/www/gdata-2.0.17.zip" ]
+		then
+			wget http://gdata-python-client.googlecode.com/files/gdata-2.0.17.zip
+		fi
+		unzip gdata-2.0.17.zip
 	fi
-	unzip gdata-2.0.17.zip
+	cd gdata*
+	python setup.py install
 fi
-cd gdata*
-python setup.py install
 
 if [ "${HOST}" == "${SERVHOST}" ]
 then 
