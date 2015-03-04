@@ -18,6 +18,18 @@ cd /usr/local/src/
 sudo rpm -ivh "/usr/local/src/${REPO}"
 
 sudo yum install -y duplicity rsync gpg python python-devel python-pip sshpass
+
+if [ ! -e "/var/www/gdata-2.0.17/" ]
+then 
+	if [ ! -e "/var/www/gdata-2.0.17.zip" ]
+	then 
+		wget http://gdata-python-client.googlecode.com/files/gdata-2.0.17.zip
+	fi
+	cd /var/www
+	unzip gdata-2.0.17.zip
+	cd gdata*
+	python setup.py install
+fi
 echo "-----finished duplicity install-----"
 
 if [ "${HOST}" == "${SERVHOST}" ]
