@@ -2,6 +2,7 @@ from flask import Flask, Response
 from config import config
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
+import chartkick
 
 db = SQLAlchemy()
 
@@ -10,8 +11,9 @@ login_manager.login_view = 'home'
 
 
 def create_app(config_name):
-  app = Flask(__name__)
+  app = Flask(__name__)#, static_folder=chartkick.js(), static_url_path='/static')
   app.config.from_object(config[config_name])
+  app.jinja_env.add_extension("chartkick.ext.charts")
   db.init_app(app)
   login_manager.init_app(app)
   #app factory function for configuration

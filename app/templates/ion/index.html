@@ -19,22 +19,14 @@
 
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
-				<h1><a href="">GottaBack</a></h1>
+				<h1><a href="">BackPack</a></h1>
 				<nav id="nav">
 					<ul>
-						{% if user.name %}
-						<li><a href="index.html">Welcome, {{ user.name }}</a></li>
-						{% else %}
 						<li><a href="index.hmtl">Home </a></li>
-						{% endif %}
 						<li><a href="left-sidebar.html">Left Sidebar</a></li>
 						<li><a href="right-sidebar.html">Right Sidebar</a></li>
 						<li><a href="no-sidebar.html">No Sidebar</a></li>
-						{% if user.name %}
-						<li><a href="" class="button special">Logout</a></li>
-						{% else %}
 						<li><a href="{{ url_for('.login') }}" class="button special">Login</a></li>
-						{% endif %}
 					</ul>
 				</nav>
 			</header>
@@ -42,7 +34,7 @@
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
-					<h2>Gotta Back</h2>
+					<h2>Back Pack</h2>
 					<p>A Google Drive backup by <a href="https://github.com/SilverBulletApps">SilverBulletApps</a></p>
 					<ul class="actions">
 						<li><a href="{{ url_for('.login') }}" class="button big special">Sign Up</a></li>
@@ -54,7 +46,7 @@
 		<!-- One -->
 			<section id="one" class="wrapper style1">
 				<header class  ="major">
-					<h2>One</h2>
+					<h2>Explore the cloud today</h2>
 					<p>Words.</p>
 				</header>
 				<div class="container">
@@ -62,22 +54,22 @@
 						<div class="4u">
 							<section class="special box">
 								<i class="icon fa-area-chart major"></i>
-								<h3>Words</h3>
-								<p>Words.</p>
+								<h3>Business</h3>
+								<p>Simple data backup for a growing business.</p>
 							</section>
 						</div>
 						<div class="4u">
 							<section class="special box">
 								<i class="icon fa-refresh major"></i>
-								<h3>Words</h3>
-								<p>Words.</p>
+								<h3>Enterprise</h3>
+								<p>The next step for the enterprise.</p>
 							</section>
 						</div>
 						<div class="4u">
 							<section class="special box">
 								<i class="icon fa-cog major"></i>
-								<h3>Words</h3>
-								<p>Words.</p>
+								<h3>Personal</h3>
+								<p>Your files when you need them.</p>
 							</section>
 						</div>
 					</div>
@@ -87,16 +79,15 @@
 		<!-- Two -->
 			<section id="two" class="wrapper style2">
 				<header class="major">
-					<h2>Two</h2>
-					<p>Words.</p>
+					<h2>Who thinks backups are important?</h2>
 				</header>
 				<div class="container">
 					<div class="row">
 						<div class="6u">
 							<section class="special">
-								<a href="#" class="image fit"><img src="../../static/images/pic01.jpg" alt="" /></a>
-								<h3>Words</h3>
-								<p>Words.</p>
+								<a href="http://i0.kym-cdn.com/photos/images/masonry/000/542/994/608.gif" class="image fit" target="_blank"><img src="../../static/images/dora.jpg" alt="" /></a>
+								<h3>Dora</h3>
+								<p>Because she gets it!!</p>
 								<ul class="actions">
 									<li><a href="#" class="button alt">Learn More</a></li>
 								</ul>
@@ -104,9 +95,9 @@
 						</div>
 						<div class="6u">
 							<section class="special">
-								<a href="#" class="image fit"><img src="../../static/images/pic02.jpg" alt="" /></a>
-								<h3>Words</h3>
-								<p>Words.</p>
+								<a id ="mustache" href="http://rack.0.mshcdn.com/media/ZgkyMDEzLzA2LzEyL2I0L2FuaW1hdGVkcmFtLjViODMyLmdpZgpwCXRodW1iCTEyMDB4OTYwMD4/3414fbe3/725/animated-rampage.gif" class="image fit" target="_blank"><img src="../../static/images/backUP.jpg" alt="" height="305" width="602"/></a>
+								<h3>Guy with mustache!</h3>
+								<p>Because he knows what's up!!</p>
 								<ul class="actions">
 									<li><a href="#" class="button alt">Learn More</a></li>
 								</ul>
@@ -122,9 +113,9 @@
 					<div class="row">
 						<div class="8u">
 							<section>
-								<h2>Three</h2>
-								<a href="#" class="image fit"><img src="../../static/images/pic03.jpg" alt="" /></a>
-								<p>Words.</p>
+								<h2>Competitors</h2>
+								<a href="#" class="image fit"><img src="../../static/images/truckBackup.gif" alt="" /></a>
+								<p>We will protect your backups unlike the careless backup above!</p>
 							</section>
 						</div>
 						<div class="4u">
@@ -182,14 +173,11 @@
 							<ul class="icons">
 								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 							</ul>
 						</div>
 					</div>
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
+						<li>&copy; BackPack. All rights reserved.</li>
 						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
 						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
 					</ul>

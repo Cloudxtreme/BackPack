@@ -32,32 +32,47 @@
   <!-- Sidebar -->
   <div id='cssmenu'>
     <ul>
-      <li class='active'><a href=''><span>Activity Log</span></a></li>
-      <li class='has-sub'><a href=''><span>Backups</span></a>
-        <ul>
-         <li><a href=""><span>Statistics</span></a></li>
-         <li><a href="{{ url_for('.backup', username=username) }}"><span>Users</span></a></li>
-        </ul>
-      </li>
-      <li><a href=''><span>Config</span></a></li>
-      <li class='last'><a href='#'><span>Contact</span></a></li>
+      <li><a href="{{ url_for('.admin') }}"><span>Activity Log</span></a></li>
+      <li><a href="{{ url_for('.stats') }}"><span>Statistics</span></a></li>
+      <li class='active'><a href=""><span>Config</span></a></li>
+      <li class='last'><a href=""><span>Contact</span></a></li>
     </ul>
   </div>
+
   
   <section id="one" class="wrapper style1">
     <header class="major">
       <h2>Backup Configuration</h2>
-      <ul>
-      {% for change in changes %}
-        {% if change['deleted'] == True %}
-          <li style="list-style-type:none;background-color:#FF6969;color:white;padding:0;"> {{ change['user'] }} deleted {{ change['title'] }} at {{ change['modificationDate'] }} </li>
-        {% elif change['creationDate'] == change['modificationDate'] %}
-          <li style="list-style-type:none;background-color:#79B2FC;color:white;padding:0;"> {{ change['user'] }} created {{ change['title'] }} at {{ change['creationDate'] }} </li>
-        {% else %}
-          <li style="list-style-type:none;padding:0;"> {{ change['user'] }} modified {{ change['title'] }} at {{ change['modificationDate'] }} </li>
-        {% endif %}
-      {% endfor %}
-      </ul>
+      <form action="/admin/config" method="POST">
+        <table>
+        <thead>
+          <th>Username</th>
+          <th>Hostname</th>
+          <th>Backup Path</th>
+          <th>Exclude</th>
+        </thead>
+        <tbody><tr>
+          <td><input type='text' name='username'/></td>
+          <td><input type='text' name='host'/></td>
+          <td><input type='text' name='backup'/></td>
+          <td><input type='text' name='exclude'/></td>
+        </tr>
+        <tr>
+          <td><input type='text' name='username'/></td>
+          <td><input type='text' name='host'/></td>
+          <td><input type='text' name='backup'/></td>
+          <td><input type='text' name='exclude'/></td>
+        </tr>
+        <tr>
+          <td><input type='text' name='username'/></td>
+          <td><input type='text' name='host'/></td>
+          <td><input type='text' name='backup'/></td>
+          <td><input type='text' name='exclude'/></td>
+        </tr></tbody>
+        </table>
+        <input type="submit" value="Generate">
+      </form>
+
     </header>
   </section>
 </body>

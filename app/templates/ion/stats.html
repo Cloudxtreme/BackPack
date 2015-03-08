@@ -1,0 +1,54 @@
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script src="http://ankane.github.io/chartkick/chartkick.js"></script>
+    <script src="../../static/js/skel.min.js"></script>
+    <script src="../../static/js/skel-layers.min.js"></script>
+    <script src="../../static/js/init.js"></script>
+    <!-- <noscript> -->
+      <link rel="stylesheet" href="../../static/css/skel.css" />
+      <link rel="stylesheet" href="../../static/css/style.css" />
+      <link rel="stylesheet" href="../../static/css/style-xlarge.css" />
+      <link rel="stylesheet" href="../../static/css/sidebar.css" />
+    <!-- </noscript> -->
+  </head>
+<body id="top">
+  <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+      <h1><a href="{{ url_for('.logout') }}">BackPack</a></h1>
+      <nav id="nav">
+        <ul>
+          <li>{% filter upper %} {{ username }} {% endfilter %}</li>
+          <li></li>
+          <li></li>
+          <li><a href="{{ url_for('.logout') }}" class="button special">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+  <!-- Sidebar -->
+  <div id='cssmenu'>
+    <ul>
+      <li><a href="{{ url_for('.admin') }}"><span>Activity Log</span></a></li>
+      <li class='active'><a href=""><span>Statistics</span></a></li>
+      <li><a href="{{ url_for('.config') }}"><span>Config</span></a></li>
+      <li class='last'><a href=''><span>Contact</span></a></li>
+    </ul>
+  </div>
+
+  
+  <section id="one" class="wrapper style1">
+    <header class="major">
+      <h2>User Statistics</h2>
+      
+      {% pie_chart stats with library={"title":"User Statistic"} %}
+    </header>
+  </section>
+</body>
+</html>

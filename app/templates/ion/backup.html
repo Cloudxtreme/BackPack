@@ -33,14 +33,8 @@
   <div id='cssmenu'>
     <ul>
       <li><a href='{{ url_for('.user', username=username) }}'><span>Activity Log</span></a></li>
-      <li class='active' class='has-sub'><a href=''><span>Backups</span></a>
-        <ul>
-         <li><a href=""><span>Statistics</span></a></li>
-         <li class='active'><a href=""><span>Users</span></a></li>
-        </ul>
-      </li>
-      <li><a href=''><span>Config</span></a></li>
-      <li class='last'><a href='#'><span>Contact</span></a></li>
+      <li class='active'><a href=''><span>Backups</span></a></li>
+      <li class='last'><a href=''><span>Contact</span></a></li>
     </ul>
   </div>
   
@@ -53,6 +47,8 @@
           {{ file['title'] }}
           {% if file.get('webContentLink') %}[
             <a href='{{ file['webContentLink'] }}'>Download</a> ]
+          {% elif file.get('mimeType') == 'application/vnd.google-apps.folder' %}[
+            <a href="{{ url_for('.download',folder=file['id'], parent=file['title']) }}">Download</a> ]
           {% endif %}
         </li>
       {% endfor %}

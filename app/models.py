@@ -16,6 +16,18 @@ class User(UserMixin, db.Model):
   member_since = db.Column(db.DateTime(), default=datetime.utcnow)
   avatar_hash = db.Column(db.String(32))
   
+  def is_active(self):
+    return True
+
+  def get_id(self):
+    return self.id
+
+  def is_authenticated(self):
+    return True
+
+  def is_anonymous(self):
+    return False
+
   @property
   def password(self):
     raise AttributeError('password is not a readable attribute')
@@ -30,6 +42,7 @@ class User(UserMixin, db.Model):
   @login_manager.user_loader
   def load_user(user_id):
     return User.query.get(int(user_id))
+
   @login_manager.unauthorized_handler
   def unauthorized():
     return Response('Please sign in to use BackPack', 401)
