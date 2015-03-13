@@ -82,7 +82,7 @@ then
 		fi
 	done
 	crontab -l > mycron
-	echo "00 00 * * * /root/config_parse" >> mycron
+	echo "00 00 * * * /root/backpack_launch" >> mycron
 	crontab mycron
 	rm mycron
 fi
