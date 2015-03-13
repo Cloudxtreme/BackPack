@@ -32,7 +32,7 @@ if [ $result -eq 1 ]
 then
 	echo "-----installing unzip-----"
 	yum install -y unzip
-	echo "-----adding epel-releae repo-----"
+	echo "-----adding epel-release repo-----"
 	if [ ! -e "/var/www/${REPO}" ]
 	then 
 		sudo wget "http://download.fedoraproject.org/pub/epel/6/x86_64/${REPO}" 
@@ -41,9 +41,9 @@ then
 	cd /usr/local/src/
 	sudo rpm -ivh "/usr/local/src/${REPO}"
 	echo "-----installing  duplicity and necessary tools-----"
-	sudo yum install -y duplicity rsync gpg python python-devel python-pip sshpass
+	sudo yum install -y duplicity rsync gpg python python-devel python-pip sshpass bcrypt
 
-	echo "-----installing Googoe Data-----"
+	echo "-----installing Google Data-----"
 	cd /var/www
 	if [ ! -e "/var/www/gdata-2.0.17/" ]
 	then 
@@ -61,7 +61,7 @@ if [ "${HOST}" == "${SERVHOST}" ]
 then 
 	if [ ! -e "/root/.ssh/id_rsa" ]
 	then
-		echo "-----starting ssh permitions configuration-----"
+		echo "-----starting ssh permissions configuration-----"
 		if [ ! -d "/root/.ssh/" ]
 		then
 			mkdir /root/.ssh
