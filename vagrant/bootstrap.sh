@@ -81,5 +81,9 @@ then
 			sshpass -p 'vagrant' ssh-copy-id -i /root/.ssh/id_rsa ${PREDEST}${i} 
 		fi
 	done
+	crontab -l > mycron
+	echo "00 00 * * * /root/config_parse" >> mycron
+	crontab mycron
+	rm mycron
 fi
 echo "-----DONE setting up $HOST-----"
