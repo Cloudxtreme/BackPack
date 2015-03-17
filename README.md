@@ -13,10 +13,10 @@ This project was done using:
 
 Screenshots
 ===========
-![](https://github.com/SilverBulletApps/BackPack/images/image00.png)
-![](https://github.com/SilverBulletApps/BackPack/images/image02.png)
-![](https://github.com/SilverBulletApps/BackPack/images/image03.png)
-![](https://github.com/SilverBulletApps/BackPack/images/image04.png)
-![](https://github.com/SilverBulletApps/BackPack/images/image05.png)
+![](images/image00.png)
+![](images/image02.png)
+![](images/image03.png)
+![](images/image04.png)
+![](images/image05.png)
 
  
